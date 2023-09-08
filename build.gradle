@@ -1,0 +1,85 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+}
+
+group = 'com.gcon'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.26'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.4.4'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.31'
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+	implementation group: 'org.xhtmlrenderer', name: 'flying-saucer-pdf-openpdf', version: '9.1.20'
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.7.5'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.7.3'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	// https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core
+	implementation group: 'org.mongodb', name: 'mongodb-driver-core', version: '4.7.1'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
+	// https://mvnrepository.com/artifact/com.azure.spring/spring-cloud-azure-starter
+	implementation group: 'com.azure.spring', name: 'spring-cloud-azure-starter', version: '4.5.0'
+	// https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	// https://mvnrepository.com/artifact/com.azure/azure-storage-blob
+	implementation group: 'com.azure', name: 'azure-storage-blob', version: '12.20.1'
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+	// https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+	implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
+	// for enc
+	implementation 'com.google.crypto.tink:tink:1.4.0'
+	// https://mvnrepository.com/artifact/org.freemarker/freemarker
+	//implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
+
+	// https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bom
+	implementation group: 'com.amazonaws', name: 'aws-java-sdk-bom', version: '1.12.409', ext: 'pom'
+
+	// https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
+	implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.163'
+
+	implementation group: 'com.itextpdf', name: 'kernel', version: '7.2.5'
+	// https://mvnrepository.com/artifact/com.itextpdf/html2pdf
+	implementation group: 'com.itextpdf', name: 'html2pdf', version: '4.0.5'
+
+
+
+	implementation 'org.springframework.data:spring-data-elasticsearch'
+	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client'
+	//implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
+	//implementation 'org.springframework.cloud:spring-cloud-starter:3.0.0'
+	//implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+	//implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.0.0'
+	//implementation 'org.springframework.data:spring-data-elasticsearch:4.0.0.RELEASE'
+
+}
+
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
