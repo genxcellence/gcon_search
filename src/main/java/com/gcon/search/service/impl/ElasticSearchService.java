@@ -3,6 +3,7 @@ package com.gcon.search.service.impl;
 import com.gcon.search.entity.Content;
 import com.gcon.search.repository.ContentElasticSearchRepository;
 import com.gcon.search.request.ContentRequest;
+import com.gcon.search.request.SearchRequest;
 import com.gcon.search.service.IElasticSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,15 @@ public class ElasticSearchService implements IElasticSearchService {
         Content updatedContent = contentElasticSearchRepository.save(contentToUpdate);
         return updatedContent;
     }
-    }
+    public List<Content> searchContent(SearchRequest request) {
+        List<Content> totalFiveRecord = contentElasticSearchRepository.findAllByUserIdAndPartyIdLikeLimit5(request.getUserId(), request.getPartyId());
+        List<Content> TotalRecord = contentElasticSearchRepository.findByUserIdAndPartyIdContentLike(request.getUserId(), request.getPartyId(), request.getSearch());
+        if (request.getFetchAll()) {
+            return totalFiveRecord;
+        } else {
+            return TotalRecord;
+        }
+    }}
 
 
 
