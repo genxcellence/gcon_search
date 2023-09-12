@@ -4,11 +4,13 @@ import com.gcon.search.entity.Content;
 import com.gcon.search.repository.ContentElasticSearchRepository;
 import com.gcon.search.request.ContentRequest;
 import com.gcon.search.request.SearchRequest;
+import com.gcon.search.response.SearchResponse;
 import com.gcon.search.service.IElasticSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,13 +56,21 @@ public class ElasticSearchService implements IElasticSearchService {
         Content updatedContent = contentElasticSearchRepository.save(contentToUpdate);
         return updatedContent;
     }
-    public List<Content> searchContent(SearchRequest request) {
-        List<Content> totalFiveRecord = contentElasticSearchRepository.findAllByUserIdAndPartyIdLikeLimit5(request.getUserId(), request.getPartyId());
-        List<Content> TotalRecord = contentElasticSearchRepository.findByUserIdAndPartyIdContentLike(request.getUserId(), request.getPartyId(), request.getSearch());
-        if (request.getFetchAll()) {
-            return totalFiveRecord;
-        } else {
-            return TotalRecord;
+
+    @Override
+    public SearchResponse searchContent(SearchRequest request) {
+        try{
+            String searchString = "%"+request.getSearch()+"%";
+            Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+            List<Content> documentRecords = new ArrayList<>();
+            if(request.getFetchAll()){
+                documentRecords = contentElasticSearchRepository.findAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+            }else{
+                documentRecords = contentElasticSearchRepository.findFirst5ByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+            }
+            return new SearchResponse(TotalRecord,documentRecords);
+        }catch(Exception ex){
+            throw ex;
         }
     }}
 

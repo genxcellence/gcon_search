@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Document(indexName = "content",indexStoreType = "text")
 public class Content {
     @Id
-    private String id;
+    private Long id;
     private String content;
     private Long partyId;
     private Long userId;

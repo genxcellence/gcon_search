@@ -22,4 +22,10 @@ public interface ContentElasticSearchRepository extends ElasticsearchRepository<
 
    List<Content> findAllByUserIdAndPartyIdLikeLimit5(Long userId, Long partyId);
 
+   List<Content> findFirst5ByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
+
+   List<Content> findAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
+
+   Long countAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId, String searchString);
+
 }
