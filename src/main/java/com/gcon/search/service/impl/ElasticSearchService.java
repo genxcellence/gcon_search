@@ -58,10 +58,10 @@ public class ElasticSearchService implements IElasticSearchService {
     }
 
     @Override
-    public SearchResponse searchContent(SearchRequest request) {
+    public SearchResponse searchContent(SearchRequest request) throws Exception {
         try{
-            String searchString = "%"+request.getSearch()+"%";
-            Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+           String searchString = "%"+request.getSearch()+"%";
+           Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
             List<Content> documentRecords = new ArrayList<>();
             if(request.getFetchAll()){
                 documentRecords = contentElasticSearchRepository.findAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
