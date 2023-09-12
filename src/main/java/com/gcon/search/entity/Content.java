@@ -12,10 +12,10 @@ import javax.persistence.Id;
 @Document(indexName = "content",indexStoreType = "text")
 public class Content {
     @Id
-  //  private Long id;
     private String id;
     private String content;
     private Long partyId;
     private Long userId;
-
+    private Long documentId;
+    private String documentName;
 }

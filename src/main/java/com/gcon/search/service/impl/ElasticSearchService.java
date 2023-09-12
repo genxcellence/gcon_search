@@ -26,6 +26,8 @@ public class ElasticSearchService implements IElasticSearchService {
         templateContent.setContent(request.getContent());
         templateContent.setPartyId(request.getPartyId());
         templateContent.setUserId(request.getUserId());
+        templateContent.setDocumentId(request.getDocumentId());
+        templateContent.setDocumentName(request.getDocumentName());
         return contentElasticSearchRepository.save(templateContent);
     }
 
@@ -45,9 +47,9 @@ public class ElasticSearchService implements IElasticSearchService {
     }
 
     @Override
-    public Content updateContent(String content,String id,Long userId) throws Exception {
+    public Content updateContent(String content,String documentId,Long userId) throws Exception {
 
-        Optional<Content> existingContent = contentElasticSearchRepository.findByIdAndUserId(id,userId);
+        Optional<Content> existingContent = contentElasticSearchRepository.findByDocumentIdAndUserId(documentId,userId);
         if (existingContent.isEmpty()){
             throw new Exception("content not exist");
         }
