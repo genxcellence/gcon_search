@@ -2,6 +2,8 @@ package com.gcon.search.controller;
 
 import com.gcon.search.entity.Content;
 import com.gcon.search.request.ContentRequest;
+import com.gcon.search.request.SearchRequest;
+import com.gcon.search.response.SearchResponse;
 import com.gcon.search.service.IElasticSearchService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +37,18 @@ public class ElasticSearchController {
         return new ResponseEntity<>(service.deleteContent(contentValue), HttpStatus.OK);
     }
 
+    @PostMapping("/search-documents")
+    public ResponseEntity<SearchResponse> getSearchDocuments(@RequestBody SearchRequest request) throws Exception {
+        return new ResponseEntity<>(service.searchContent(request), HttpStatus.OK);
+
+    }
+
 
   /*  @PutMapping("/update-content")
     public ResponseEntity<Content> updateContent(@RequestBody Content request) throws Exception {
         return new ResponseEntity<>(service.updateContent(request), HttpStatus.OK);
     }*/
-    @PutMapping("/update-content/{id}")
+    @PutMapping("/update-content/{id}/{userId}")
     public ResponseEntity<Content> updateContent(@RequestBody String Content,@PathVariable String id,@PathVariable Long userId) throws Exception {
         return new ResponseEntity<>(service.updateContent(Content,id,userId), HttpStatus.OK);
     }

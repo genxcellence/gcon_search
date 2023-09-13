@@ -16,5 +16,6 @@ public class Content {
     private String content;
     private Long partyId;
     private Long userId;
-
+    private Long documentId;
+    private String documentName;
 }

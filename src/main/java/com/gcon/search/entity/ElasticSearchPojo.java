@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 
 public class ElasticSearchPojo {
 
-    private String contactName;
+    private String documentName;
     private Long documentId;
     private String documentContent;
     private Long partyId;
     private Long userId;
 
     public ElasticSearchPojo(String contactName, Long documentId, String documentContent, Long partyId, Long userId) {
-        this.contactName = contactName;
+        this.documentName = contactName;
         this.documentId = documentId;
         this.documentContent = documentContent;
         this.partyId = partyId;

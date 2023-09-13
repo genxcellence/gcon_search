@@ -1,5 +1,6 @@
 package com.gcon.search.response;
 
+import com.gcon.search.entity.Content;
 import com.gcon.search.entity.ElasticSearchPojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchResponse {
-    private Integer totalCount;
-    private List<ElasticSearchPojo> documents;
+    private Long totalCount;
+    private List<Content> documents;
 }

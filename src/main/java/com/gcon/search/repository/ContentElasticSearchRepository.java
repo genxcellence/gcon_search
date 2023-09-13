@@ -14,12 +14,12 @@ public interface ContentElasticSearchRepository extends ElasticsearchRepository<
 
    List<Content> findByContent(String content);
 
-   Optional<Content> findByIdAndUserId(String id,Long userId);
+   Optional<Content> findByDocumentIdAndUserId(String id,Long userId);
 
-   List<Content> findByUserIdAndPartyIdContentLike(Long userId, Long partyId, String content);
+   List<Content> findFirst5ByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
 
-   long countAllByUserIdAndPartyIdAndSearchString(String userId, String partyId, String searchString);
+   List<Content> findAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
 
-   List<Content> findAllByUserIdAndPartyIdLikeLimit5(Long userId, Long partyId);
+   Long countAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId, String searchString);
 
 }
