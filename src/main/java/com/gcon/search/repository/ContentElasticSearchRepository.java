@@ -1,6 +1,7 @@
 package com.gcon.search.repository;
 
 import com.gcon.search.entity.Content;
+import org.hibernate.annotations.NamedNativeQuery;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +17,10 @@ public interface ContentElasticSearchRepository extends ElasticsearchRepository<
 
    Optional<Content> findByDocumentIdAndUserId(String id,Long userId);
 
-   List<Content> findFirst5ByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
+   List<Content> findFirst5ByUserIdAndPartyIdAndContent(Long userId, Long partyId,String content);
 
-   List<Content> findAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
+   List<Content> findAllByUserIdAndPartyIdAndContent(Long userId, Long partyId,String content);
 
-   Long countAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId, String searchString);
+   Long countAllByUserIdAndPartyIdAndContent(Long userId, Long partyId, String searchString);
 
 }

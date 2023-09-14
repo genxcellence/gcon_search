@@ -6,7 +6,10 @@ import com.gcon.search.request.ContentRequest;
 import com.gcon.search.request.SearchRequest;
 import com.gcon.search.response.SearchResponse;
 import com.gcon.search.service.IElasticSearchService;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -63,12 +66,12 @@ public class ElasticSearchService implements IElasticSearchService {
     public SearchResponse searchContent(SearchRequest request) throws Exception {
         try{
            String searchString = "%"+request.getSearch()+"%";
-           Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+           Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
             List<Content> documentRecords = new ArrayList<>();
             if(request.getFetchAll()){
-                documentRecords = contentElasticSearchRepository.findAllByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+                documentRecords = contentElasticSearchRepository.findAllByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
             }else{
-                documentRecords = contentElasticSearchRepository.findFirst5ByUserIdAndPartyIdAndContentLike(request.getUserId(), request.getPartyId(), searchString);
+                documentRecords = contentElasticSearchRepository.findFirst5ByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
             }
             return new SearchResponse(TotalRecord,documentRecords);
         }catch(Exception ex){

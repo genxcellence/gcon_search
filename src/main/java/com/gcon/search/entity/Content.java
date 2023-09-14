@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "content",indexStoreType = "text")
+@Document(indexName = "content")
 public class Content {
     @Id
     private String id;
