@@ -74,7 +74,7 @@ public class ElasticSearchService implements IElasticSearchService {
                 documentRecords = contentElasticSearchRepository.findFirst5ByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
             }
             for(Content docContent: documentRecords){
-                docContent.setContent(docContent.getContent().substring(0,100));
+                docContent.setContent(docContent.getContent().substring(0,10));
             }
             return new SearchResponse(TotalRecord,documentRecords);
         }catch(Exception ex){
