@@ -16,7 +16,7 @@ public interface IElasticSearchService {
 
   Content deleteContent(String contentValue);
 
-  Content updateContent(String content,String id,Long userId) throws Exception;
+  Content updateContent(String content,String id,Long userId,String status) throws Exception;
 
   SearchResponse searchContent(SearchRequest request) throws Exception;
 }

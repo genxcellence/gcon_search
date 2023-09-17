@@ -18,4 +18,5 @@ public class Content {
     private Long userId;
     private Long documentId;
     private String documentName;
+    private String status;
 }

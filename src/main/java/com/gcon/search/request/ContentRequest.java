@@ -9,4 +9,5 @@ public class ContentRequest {
     private Long partyId;
     private Long documentId;
     private String documentName;
+    private String status;
 }
