@@ -52,4 +52,8 @@ public class ElasticSearchController {
     public ResponseEntity<Content> updateContent(@RequestBody String Content,@PathVariable String id,@PathVariable Long userId) throws Exception {
         return new ResponseEntity<>(service.updateContent(Content,id,userId), HttpStatus.OK);
     }
+    @PutMapping("/update-status")
+    public ResponseEntity<String> getUpdateStatus(@RequestParam Long documentId) {
+        return new ResponseEntity<>(service.getUpdateStatus(documentId), HttpStatus.OK);
+    }
 }

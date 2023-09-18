@@ -19,4 +19,7 @@ public interface IElasticSearchService {
   Content updateContent(String content,String id,Long userId) throws Exception;
 
   SearchResponse searchContent(SearchRequest request) throws Exception;
+
+
+  String getUpdateStatus(Long documentId);
 }

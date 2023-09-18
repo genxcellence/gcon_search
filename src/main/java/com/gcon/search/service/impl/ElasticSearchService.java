@@ -31,6 +31,7 @@ public class ElasticSearchService implements IElasticSearchService {
         templateContent.setUserId(request.getUserId());
         templateContent.setDocumentId(request.getDocumentId());
         templateContent.setDocumentName(request.getDocumentName());
+        templateContent.setStatus(request.getStatus());
         return contentElasticSearchRepository.save(templateContent);
     }
 
@@ -60,6 +61,20 @@ public class ElasticSearchService implements IElasticSearchService {
         contentToUpdate.setContent(content);
         Content updatedContent = contentElasticSearchRepository.save(contentToUpdate);
         return updatedContent;
+    }
+
+    @Override
+    public String getUpdateStatus(Long documentId)
+    {
+        Content contentStatus = contentElasticSearchRepository.findDocumentStatusByDocumentId(documentId);
+        if(contentStatus!=null){
+            contentStatus.setStatus(contentStatus.getStatus());
+            Content updatedStatus = contentElasticSearchRepository.save(contentStatus);
+            return updatedStatus.toString();
+        }
+        else{
+            return null;
+        }
     }
 
     @Override
