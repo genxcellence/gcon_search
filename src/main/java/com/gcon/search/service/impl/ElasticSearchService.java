@@ -64,17 +64,15 @@ public class ElasticSearchService implements IElasticSearchService {
     }
 
     @Override
-    public String getUpdateStatus(Long documentId)
-    {
-        Content contentStatus = contentElasticSearchRepository.findDocumentStatusByDocumentId(documentId);
-        if(contentStatus!=null){
-            contentStatus.setStatus(contentStatus.getStatus());
-            Content updatedStatus = contentElasticSearchRepository.save(contentStatus);
-            return updatedStatus.toString();
+    public Content updateDocStatus(ContentRequest request) throws Exception {
+        Optional<Content> existingContent = contentElasticSearchRepository.findByDocumentId(request.getDocumentId());
+        if (existingContent.isEmpty()){
+            throw new Exception("content not exist");
         }
-        else{
-            return null;
-        }
+        Content contentToUpdate = existingContent.get();
+        contentToUpdate.setStatus(request.getStatus());
+        Content updatedContent = contentElasticSearchRepository.save(contentToUpdate);
+        return updatedContent;
     }
 
     @Override

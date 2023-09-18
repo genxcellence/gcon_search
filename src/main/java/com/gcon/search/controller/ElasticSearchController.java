@@ -53,7 +53,7 @@ public class ElasticSearchController {
         return new ResponseEntity<>(service.updateContent(Content,id,userId), HttpStatus.OK);
     }
     @PutMapping("/update-status")
-    public ResponseEntity<String> getUpdateStatus(@RequestParam Long documentId) {
-        return new ResponseEntity<>(service.getUpdateStatus(documentId), HttpStatus.OK);
+    public ResponseEntity<Content> updateContractStatus(@RequestBody ContentRequest request) throws Exception {
+        return new ResponseEntity<>(service.updateDocStatus(request), HttpStatus.OK);
     }
 }

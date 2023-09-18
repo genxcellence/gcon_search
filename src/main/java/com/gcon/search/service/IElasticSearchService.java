@@ -21,5 +21,5 @@ public interface IElasticSearchService {
   SearchResponse searchContent(SearchRequest request) throws Exception;
 
 
-  String getUpdateStatus(Long documentId);
+  Content updateDocStatus(ContentRequest request) throws Exception;
 }
