@@ -79,17 +79,33 @@ public class ElasticSearchService implements IElasticSearchService {
     public SearchResponse searchContent(SearchRequest request) throws Exception {
         try{
            String searchString = "%"+request.getSearch()+"%";
-           Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
-            List<Content> documentRecords = new ArrayList<>();
-            if(request.getFetchAll()){
-                documentRecords = contentElasticSearchRepository.findAllByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
-            }else{
-                documentRecords = contentElasticSearchRepository.findFirst5ByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
-            }
-            for(Content docContent: documentRecords){
-                docContent.setContent(docContent.getContent().substring(0,10));
-            }
-            return new SearchResponse(TotalRecord,documentRecords);
+           if(request.getIsAdmin()){
+               Long TotalRecord = contentElasticSearchRepository.countAllByPartyIdAndContent(request.getPartyId(),searchString);
+               List<Content> documentRecords = new ArrayList<>();
+               if(request.getFetchAll()){
+                   documentRecords = contentElasticSearchRepository.findAllByPartyIdAndContent(request.getPartyId(),searchString);
+               }else{
+                   documentRecords = contentElasticSearchRepository.findFirst5ByPartyIdAndContent(request.getPartyId(),searchString);
+               }
+               for(Content docContent: documentRecords){
+                   docContent.setContent(docContent.getContent().substring(0,10));
+               }
+               return new SearchResponse(TotalRecord,documentRecords);
+
+          }
+           else{
+               Long TotalRecord = contentElasticSearchRepository.countAllByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
+               List<Content> documentRecords = new ArrayList<>();
+               if(request.getFetchAll()){
+                   documentRecords = contentElasticSearchRepository.findAllByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
+               }else{
+                   documentRecords = contentElasticSearchRepository.findFirst5ByUserIdAndPartyIdAndContent(request.getUserId(), request.getPartyId(), searchString);
+               }
+               for(Content docContent: documentRecords){
+                   docContent.setContent(docContent.getContent().substring(0,10));
+               }
+               return new SearchResponse(TotalRecord,documentRecords);
+           }
         }catch(Exception ex){
             throw ex;
         }

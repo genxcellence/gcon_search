@@ -25,6 +25,11 @@ public interface ContentElasticSearchRepository extends ElasticsearchRepository<
 
    Optional<Content> findByDocumentId(Long id);
 
-   Content findDocumentStatusByDocumentId(Long documentId);
+   List<Content> findFirst5ByPartyIdAndContent(Long partyId,String content);
+
+   List<Content> findAllByPartyIdAndContent(Long partyId,String content);
+
+   Long countAllByPartyIdAndContent(Long partyId,String searchString);
+
 
 }
