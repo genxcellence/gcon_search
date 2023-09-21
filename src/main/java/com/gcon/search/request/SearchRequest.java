@@ -12,4 +12,5 @@ public class SearchRequest {
     private Long partyId;
     private String search;
     private Boolean fetchAll;
+    private Boolean isAdmin;
 }
