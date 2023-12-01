@@ -17,19 +17,19 @@ public interface ContentElasticSearchRepository extends ElasticsearchRepository<
 
    Optional<Content> findByDocumentIdAndUserId(String id,Long userId);
 
-   List<Content> findFirst5ByUserIdAndPartyIdAndContent(Long userId, Long partyId,String content);
+   List<Content> findFirst5ByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
 
-   List<Content> findAllByUserIdAndPartyIdAndContent(Long userId, Long partyId,String content);
+   List<Content> findAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId,String content);
 
-   Long countAllByUserIdAndPartyIdAndContent(Long userId, Long partyId, String searchString);
+   Long countAllByUserIdAndPartyIdAndContentLike(Long userId, Long partyId, String searchString);
 
    Optional<Content> findByDocumentId(Long id);
 
-   List<Content> findFirst5ByPartyIdAndContent(Long partyId,String content);
+   List<Content> findFirst5ByPartyIdAndContentLike(Long partyId,String content);
 
-   List<Content> findAllByPartyIdAndContent(Long partyId,String content);
+   List<Content> findAllByPartyIdAndContentLike(Long partyId,String content);
 
-   Long countAllByPartyIdAndContent(Long partyId,String searchString);
+   Long countAllByPartyIdAndContentLike(Long partyId,String searchString);
 
 
 }
